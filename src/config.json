@@ -1,0 +1,7 @@
+{
+    "baseurl": "http://139.59.22.213:3005/",
+    "apibaseurl": "http://139.59.22.213:3005",
+    "apiurl":"http://apijewelar.m8itsolutions.in/api",
+    "fileurl":"http://apijewelar.m8itsolutions.in/storage"
+    
+}
