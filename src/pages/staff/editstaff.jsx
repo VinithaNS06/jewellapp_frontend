@@ -27,7 +27,7 @@ const StaffEdit = () => {
                     <div className="col-md-6">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Staffname
@@ -42,7 +42,7 @@ const StaffEdit = () => {
                     <div className="col-md-6">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Email address
@@ -57,7 +57,7 @@ const StaffEdit = () => {
                     <div className="col-md-6">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           First name
@@ -72,7 +72,7 @@ const StaffEdit = () => {
                     <div className="col-md-6">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Last name

@@ -4,7 +4,7 @@ import "./store.scss";
 import config from "../../config.json";
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Store = () => {
   const accesstoken = JSON.parse(localStorage.getItem("user"));
@@ -15,7 +15,7 @@ const Store = () => {
   }, []);
 
   const getStore = async () => {
-    let storeresult = await fetch(config.apiurl + "/branch");
+    let storeresult = await fetch(config.apiurl + "/branch/");
     storeresult = await storeresult.json();
     setStores(storeresult.data.results);
   };
@@ -38,7 +38,7 @@ const Store = () => {
       apicaturl = config.apiurl + "/branch/" + updateid;
       methodapi = "put";
     } else {
-      apicaturl = config.apiurl + "/branch";
+      apicaturl = config.apiurl + "/branch/create";
       methodapi = "post";
     }
 
@@ -104,8 +104,8 @@ const Store = () => {
                     </div>
 
                     {/* <div className="col-6 text-end">
-                                    <a ahrefjavascript="javascript:void(0);" className="btn btn-outline-primary btn-sm mb-0 "  >Import</a> &nbsp;&nbsp;
-                                    <a ahrefjavascript="/category/add" className="btn btn-outline-primary btn-sm mb-0 ">Add New</a>
+                                    <AHrefJavascript="javascript:void(0);" className="btn btn-outline-primary btn-sm mb-0 "  >Import</a> &nbsp;&nbsp;
+                                    <AHrefJavascript="/category/add" className="btn btn-outline-primary btn-sm mb-0 ">Add New</a>
                                 </div> */}
                   </div>
                 </div>
@@ -125,45 +125,48 @@ const Store = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {stores.map((item, index) => (
-                          <tr key={item._id}>
-                            <td>{index + 1}</td>
-                            <td>
-                              <div className="d-flex px-2 py-1">
-                                <div className="d-flex flex-column justify-content-center">
-                                  <h6 className="mb-0 text-sm">{item.name}</h6>
-                                  <p className="text-xs mb-2">
-                                    Location: {item.location}
-                                  </p>
+                        {stores &&
+                          stores.map((item, index) => (
+                            <tr key={item._id}>
+                              <td>{index + 1}</td>
+                              <td>
+                                <div className="d-flex px-2 py-1">
+                                  <div className="d-flex flex-column justify-content-center">
+                                    <h6 className="mb-0 text-sm">
+                                      {item.name}
+                                    </h6>
+                                    <p className="text-xs mb-2">
+                                      Location: {item.location}
+                                    </p>
+                                  </div>
                                 </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="ms-auto">
-                                <a
-                                  className="btn btn-link text-dark px-3 mb-0"
-                                  onClick={() => getStoreedit(item._id)}
-                                >
-                                  <i
-                                    className="fas fa-pencil-alt text-dark me-2"
-                                    aria-hidden="true"
-                                  ></i>
-                                  Edit
-                                </a>
-                                <a
-                                  className="btn btn-link text-danger text-gradient px-3 mb-0"
-                                  onClick={() => deleteStore(item._id)}
-                                >
-                                  <i
-                                    className="far fa-trash-alt me-2"
-                                    aria-hidden="true"
-                                  ></i>
-                                  Delete
-                                </a>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                              <td>
+                                <div className="ms-auto">
+                                  <a
+                                    className="btn btn-link text-dark px-3 mb-0"
+                                    onClick={() => getStoreedit(item._id)}
+                                  >
+                                    <i
+                                      className="fas fa-pencil-alt text-dark me-2"
+                                      aria-hidden="true"
+                                    ></i>
+                                    Edit
+                                  </a>
+                                  <a
+                                    className="btn btn-link text-danger text-gradient px-3 mb-0"
+                                    onClick={() => deleteStore(item._id)}
+                                  >
+                                    <i
+                                      className="far fa-trash-alt me-2"
+                                      aria-hidden="true"
+                                    ></i>
+                                    Delete
+                                  </a>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
                       </tbody>
                     </table>
                   </div>
@@ -185,7 +188,7 @@ const Store = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Location
@@ -212,7 +215,7 @@ const Store = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Address

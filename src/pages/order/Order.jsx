@@ -16,7 +16,7 @@ const Order = () => {
     getOrders();
   }, []);
 
-  const getOrders = async () => {
+  const getOrders = async (id) => {
     let orderresult = await fetch(config.apiurl + "/webreport/orderlist/0", {
       method: "get",
       headers: {
@@ -26,7 +26,7 @@ const Order = () => {
     });
 
     orderresult = await orderresult.json();
-    setOrders(orderresult.data);
+    setOrders(orderresult?.data);
   };
 
   function getDeliverydetails(dd) {
@@ -39,17 +39,20 @@ const Order = () => {
     return podvalue;
   }
 
-  /*async function getUserdetails(userid) {
-        let custresult = await fetch(config.apiurl+"/api/webreport/userlist/"+userid,{
-        method: "get",
-        headers:{
-            'Content-Type': 'application/json',
-            'Authorization': 'bearer '+accesstoken.data.access_token
-        }
-        });
-        custresult = await custresult.json();       
-        return custresult.data[0];
-    }*/
+  // async function getUserdetails(userid) {
+  //   let custresult = await fetch(
+  //     config.apiurl + "/api/webreport/userlist/" + userid,
+  //     {
+  //       method: "get",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "bearer " + accesstoken.data.access_token,
+  //       },
+  //     }
+  //   );
+  //   custresult = await custresult.json();
+  //   return custresult.data[0];
+  // }
 
   return (
     <>

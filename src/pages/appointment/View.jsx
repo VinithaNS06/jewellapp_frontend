@@ -5,6 +5,8 @@ import Header from "../../components/headerbar/Header";
 import { useParams, useNavigate } from "react-router-dom";
 import config from "../../config.json";
 import axios from "axios";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
 import Sidebar from "../../components/sidebar/Sidebar";
 
 const ViewAppointment = () => {
@@ -30,7 +32,6 @@ const ViewAppointment = () => {
   useEffect(() => {
     getStaffData();
     getAppointmentsView();
-    updateStatus();
   }, []);
   const getStaffData = async () => {
     let staffList = await fetch(config.apiurl + "/staff/getstaff", {
@@ -45,11 +46,11 @@ const ViewAppointment = () => {
   };
 
   const updateStatus = async () => {
-    const headers = {
+    const scheduledata = {
       method: "put",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "bearer " + accesstoken.data.access_token,
+        Authorization: "Bearer " + accesstoken.data.access_token,
       },
       body: JSON.stringify({
         schedule_status: scheduleStatus,
@@ -57,7 +58,8 @@ const ViewAppointment = () => {
         staffValue: staffValue,
       }),
     };
-    fetch(config.apiurl + "/schedule/" + appointmentId, headers);
+    console.log(scheduledata);
+    fetch(config.apiurl + "/schedule/" + appointmentId, scheduledata);
   };
 
   const getAppointmentsView = async () => {
@@ -71,11 +73,11 @@ const ViewAppointment = () => {
       }
     );
     appointmentdetails = await appointmentdetails.json();
-    setAppointmentId(appointmentdetails.data[0]._id);
+    setAppointmentId(appointmentdetails?.data[0]?._id);
     setusername(appointmentdetails.data[0].user_id.name);
     setPhoneNumber(appointmentdetails.data[0].user_id.phone);
     setEmail(appointmentdetails.data[0].user_id.email);
-    setStreetName(appointmentdetails.data[0].user_id.streetname);
+    setStreetName(appointmentdetails.data[0].user_id.addresstype);
     setStatus(appointmentdetails.data[0].schedule_status);
     setDate(appointmentdetails.data[0].date);
     setTime(appointmentdetails.data[0].time);
@@ -110,61 +112,56 @@ const ViewAppointment = () => {
                       <div className="card-body p-3">
                         <div className="row">
                           <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">
+                            <p
+                              className="text-sm mb-0 text-uppercase font-weight-bold"
+                              style={{
+                                margin: "20px 30px 20px 30px",
+                                color: "black",
+                                fontSize: "30px",
+                              }}
+                            >
                               Customer Details
                             </p>
                             <div className="table-responsive p-5">
-                              <table className="table align-items-center mb-0 ">
-                                <tr>
-                                  <td>Name</td>
-                                  <td>{username}</td>
-                                </tr>
-                                <tr>
-                                  <td>Phone No</td>
-                                  <td>{phonenumber}</td>
-                                </tr>
-                                <tr>
-                                  <td>Email</td>
-                                  <td>{Email}</td>
-                                </tr>
-                                <tr>
-                                  <td>Address</td>
-                                  <td>{streetName}</td>
-                                </tr>
-                              </table>
+                              <Card style={{ width: "18rem" }}>
+                                <ListGroup variant="flush">
+                                  <ListGroup.Item>
+                                    Name :{username}
+                                  </ListGroup.Item>
+                                  <ListGroup.Item>
+                                    Phone No :{phonenumber}
+                                  </ListGroup.Item>
+                                  <ListGroup.Item>
+                                    Email :{phonenumber}
+                                  </ListGroup.Item>
+                                  <ListGroup.Item>
+                                    Address :{streetName}
+                                  </ListGroup.Item>
+                                </ListGroup>
+                              </Card>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-xl-12 col-sm-12 mb-xl-0 mb-4">
-                    <div className="">
-                      <div className="card-body p-3">
-                        <div className="row">
-                          <div className="numbers">
-                            <p className="text-sm mb-0 text-uppercase font-weight-bold">
+                          <div>
+                            <p
+                              className="text-sm mb-0 text-uppercase font-weight-bold"
+                              style={{
+                                margin: "20px 30px 20px 30px",
+                                color: "black",
+                                fontSize: "30px",
+                              }}
+                            >
                               Appoinment Details
                             </p>
                             <div className="table-responsive p-5">
-                              <table className="table align-items-center mb-0 ">
-                                <tr>
-                                  <td>Date</td>
-                                  <td>{date}</td>
-                                </tr>
-                                <tr>
-                                  <td>Time</td>
-                                  <td>{time}</td>
-                                </tr>
-                                <tr>
-                                  <td>Status</td>
-                                  <td>{status}</td>
-                                </tr>
-                                <tr>
-                                  <td colspan="2">&nbsp;</td>
-                                </tr>
-                              </table>
+                              <Card style={{ width: "18rem" }}>
+                                <ListGroup variant="flush">
+                                  <ListGroup.Item>Date :{date}</ListGroup.Item>
+                                  <ListGroup.Item>Time :{time}</ListGroup.Item>
+                                  <ListGroup.Item>
+                                    Status :{status}
+                                  </ListGroup.Item>
+                                </ListGroup>
+                              </Card>
                             </div>
                           </div>
                         </div>
@@ -172,42 +169,45 @@ const ViewAppointment = () => {
                     </div>
                   </div>
                 </div>
-                <div className="card-body px-0 pt-0 pb-2">
-                  <p className="text-sm mb-0 text-uppercase font-weight-bold pl-2">
+                <div className="col-6 d-flex align-items-center">
+                  <p
+                    className="text-sm mb-0 text-uppercase font-weight-bold"
+                    style={{
+                      margin: "20px 30px 20px 30px",
+                      color: "black",
+                      fontSize: "30px",
+                    }}
+                  >
                     Product Details
                   </p>
-                  <div className="table-responsive p-5">
-                    <table className="table align-items-center mb-0 ">
-                      <thead>
-                        <tr>
-                          <th className="text-secondary opacity-7 ps-2">
-                            S.No
-                          </th>
-                          <th className="text-secondary opacity-7">Image</th>
-                          <th className="text-secondary opacity-7 ps-2">
-                            Name
-                          </th>
-                        </tr>
-                      </thead>
+                </div>
+                <div className="table-responsive p-5">
+                  <table className="table align-items-center mb-0 ">
+                    <thead>
+                      <tr>
+                        <th className="text-secondary opacity-7 ps-2">S.No</th>
+                        <th className="text-secondary opacity-7">Image</th>
+                        <th className="text-secondary opacity-7 ps-2">Name</th>
+                      </tr>
+                    </thead>
 
-                      <tbody>
-                        {productslist &&
-                          productslist.map((item, index) => (
-                            <tr key={item._id}>
-                              <td>{index + 1}</td>
-                              <td>
-                                <img
-                                  src={config.fileurl + item.image}
-                                  className="avatar avatar-sm me-3"
-                                  alt={item.name}
-                                />
-                              </td>
-                              <td>{item.name}</td>
-                            </tr>
-                          ))}
-                      </tbody>
-                    </table>
-                  </div>
+                    <tbody>
+                      {productslist &&
+                        productslist.map((item, index) => (
+                          <tr key={item._id}>
+                            <td>{index + 1}</td>
+                            <td>
+                              <img
+                                src={config.fileurl + item.image}
+                                className="avatar avatar-sm me-3"
+                                alt={item.name}
+                              />
+                            </td>
+                            <td>{item.name}</td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -226,7 +226,7 @@ const ViewAppointment = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           required=""
                           className="form-control-label"
                         >
@@ -247,7 +247,7 @@ const ViewAppointment = () => {
                       </div>
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           required=""
                           className="form-control-label"
                         >
@@ -262,7 +262,7 @@ const ViewAppointment = () => {
                       </div>
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Status

@@ -31,7 +31,7 @@ const Login = () => {
     result = await result.json();
     if (result.status == "true") {
       localStorage.setItem("user", JSON.stringify(result));
-      navigate("/order");
+      navigate("/dashboard");
     } else {
       alert("Enter Correct values");
     }

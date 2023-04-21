@@ -179,7 +179,7 @@ const Staff = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          htmlFor="example-text-input"
+                          htmlhtmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Name
@@ -207,7 +207,7 @@ const Staff = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          htmlFor="example-text-input"
+                          htmlhtmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Staff ID

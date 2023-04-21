@@ -5,6 +5,7 @@ import config from "../../config.json";
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+// import CategorySub from "../../SubCategory/SubCategory";
 
 const Category = () => {
   const accesstoken = JSON.parse(localStorage.getItem("user"));
@@ -15,7 +16,7 @@ const Category = () => {
   }, []);
 
   const getCategory = async () => {
-    let catresult = await fetch(config.apiurl + "/category/");
+    let catresult = await fetch(config.apiurl + "/category/getcategory");
     catresult = await catresult.json();
     setCategories(catresult.data.results);
   };
@@ -139,7 +140,16 @@ const Category = () => {
                                   ></i>
                                   Edit
                                 </a>
-                                {/* <a className="btn btn-link text-danger text-gradient px-3 mb-0" onClick={()=> deleteCategory(item._id)}><i className="far fa-trash-alt me-2" aria-hidden="true"></i>Delete</a> */}
+                                <a
+                                  href={"/subcategory/edit/" + item._id}
+                                  className="btn btn-link text-success px-3 mb-0"
+                                >
+                                  <i
+                                    className="fa fa-list-ul text-success me-2"
+                                    aria-hidden="true"
+                                  ></i>
+                                  Subcategory
+                                </a>
                               </div>
                             </td>
                           </tr>
@@ -165,7 +175,7 @@ const Category = () => {
                     <div className="col-md-12">
                       <div className="form-group">
                         <label
-                          for="example-text-input"
+                          htmlFor="example-text-input"
                           className="form-control-label"
                         >
                           Name

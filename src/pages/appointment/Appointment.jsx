@@ -14,7 +14,7 @@ const Appoinment = () => {
     axios
       .get(
         config.apiurl +
-          "/schedule/all_list?startDate=2023-01-01&endDate=2023-03-28&status=Completed",
+          "/schedule/all_list?startDate=2022-11-24&endDate=2023-03-30&status=Completed",
         {
           headers: {
             Authorization: "Bearer " + accesstoken.data.access_token,
@@ -22,8 +22,8 @@ const Appoinment = () => {
         }
       )
       .then((res) => {
-        setAppointmentsInfo(res.data.data);
-        console.log(res);
+        setAppointmentsInfo(res?.data?.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,20 +37,23 @@ const Appoinment = () => {
   //   const apptvalue = JSON.parse(appt);
   //   return apptvalue;
   // }
-  // const updateStatus=async()=>{
-  //   let updatedetails=await fetch(config.apiurl+"/schedule/"+params.updateid,{
-  //     method:'put',
-  //     body: {schedule_status:"Completed"},
-  //     headers:{
-  //       'Authorization': 'bearer '+accesstoken.data.access_token
-  //   }
-  //   });
-  //   updatedetails=await updatedetails.json();
-  //   setUpdateApptInfo(updatedetails.data.schedule_status);
+  // const updateStatus = async () => {
+  //   let updatedetails = await fetch(
+  //     config.apiurl + "/schedule/" + params.updateid,
+  //     {
+  //       method: "put",
+  //       body: { schedule_status: "Completed" },
+  //       headers: {
+  //         Authorization: "bearer " + accesstoken.data.access_token,
+  //       },
+  //     }
+  //   );
+  //   updatedetails = await updatedetails.json();
+  //   // setUpdateApptInfo(updatedetails.data.schedule_status);
   //   // setUpdateApptInfo(updatedetails.data.usclassName=er_phone);
   //   console.log(updatedetails.data.schedule_status);
   //   // console.log(updatedetails.data.user_phone);
-  // }
+  // };
 
   return (
     <>
@@ -151,7 +154,7 @@ const Appoinment = () => {
                                     className="btn btn-link text-dark px-3 mb-0"
                                   >
                                     <i
-                                      className="fa fa-eye-alt text-dark me-2"
+                                      className="fa fa-eye text-dark me-2"
                                       aria-hidden="true"
                                     ></i>
                                     View

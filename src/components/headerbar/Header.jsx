@@ -25,12 +25,12 @@ const Headerbar = () => {
           id="navbar"
         >
           <div className="ms-md-auto pe-md-3 d-flex align-items-center"></div>
-          <ul className="navbar-nav  justify-content-end">
+          <ul className="navbar-nav justify-content-end">
             <li className="nav-item d-flex align-items-center">
               <a
                 ahrefjavascript="javascript:void(0);"
                 onClick={logout}
-                className="nav-link text-white font-weight-bold px-0"
+                className="nav-link text-white font-weight-bold px-3"
               >
                 <i className="fa fa-sign-out me-sm-1"></i>
                 <span className="d-sm-inline d-none">Logout</span>
