@@ -10,22 +10,22 @@ import axios from "axios";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Header from "../../../components/headerbar/Header";
 
-const About = () => {
+const AddAbout = () => {
   const accesstoken = JSON.parse(localStorage.getItem("user"));
   const [about, setAbout] = useState([]);
 
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     getAbout();
-  //   }, []);
+  useEffect(() => {
+    getAbout();
+  }, []);
 
-  //   const getAbout = async () => {
-  //     let abtresult = await fetch(config.apiurl + "/aboutus/get_about");
-  //     abtresult = await abtresult.json();
-  //     console.log(abtresult?.data?.results[1]);
-  //     setAbout(abtresult?.data?.results[1]);
-  //   };
+  const getAbout = async () => {
+    let abtresult = await fetch(config.apiurl + "/aboutlist/get_about");
+    abtresult = await abtresult.json();
+    console.log(abtresult?.data?.results[1]);
+    setAbout(abtresult?.data?.results[1]);
+  };
 
   const [title, setTitle] = useState("");
 
@@ -67,7 +67,7 @@ const About = () => {
   };
 
   const submitProductDetails = async (res) => {
-    const editupdateurl = config.apiurl + "/aboutus/add";
+    const editupdateurl = config.apiurl + "/about/";
     const configdata = {
       headers: {
         "Content-Type": "application/json",
@@ -261,4 +261,4 @@ const About = () => {
     </>
   );
 };
-export default About;
+export default AddAbout;

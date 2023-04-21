@@ -29,6 +29,13 @@ import ViewCustomer from "./pages/customer/viewCustomer";
 import Rate from "./pages/rate/Rate";
 import RateAdd from "./pages/rate/addrate";
 import RateEdit from "./pages/rate/editrate";
+import About from "./pages/website/about/About";
+import AddAbout from "./pages/website/about/addabout";
+import EditAbout from "./pages/website/about/editabout";
+import Banner from "./pages/website/banner/Banner";
+import OptionList from "./pages/website/optionlist/OptionList";
+import Testimonials from "./pages/website/testimonials/Testimonials";
+import TryOn from "./pages/website/tryon/TryOn";
 function App() {
   const theme = createTheme();
   return (
@@ -73,6 +80,24 @@ function App() {
               <Route path="rate/add" element={<RateAdd />} />
               <Route path="rate/edit" element={<RateEdit />} />
               <Route path="rate/edit/:id" element={<RateEdit />} />
+
+              {/* About Routes */}
+              <Route path="about" element={<About />} />
+              <Route path="about/add" element={<AddAbout />} />
+              <Route path="about/edit" element={<EditAbout />} />
+              <Route path="about/edit/:id" element={<EditAbout />} />
+
+              {/* Banner Routes */}
+              <Route path="banner" element={<Banner />} />
+
+              {/* Option Routes */}
+              <Route path="option" element={<OptionList />} />
+
+              {/* Testimonial Routes */}
+              <Route path="testimonial" element={<Testimonials />} />
+
+              {/* TryOn Routes */}
+              <Route path="tryon" element={<TryOn />} />
             </Route>
           </Routes>
         </BrowserRouter>

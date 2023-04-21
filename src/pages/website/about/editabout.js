@@ -10,28 +10,28 @@ import axios from "axios";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Header from "../../../components/headerbar/Header";
 
-const About = () => {
+const AddAbout = () => {
   const accesstoken = JSON.parse(localStorage.getItem("user"));
   const [about, setAbout] = useState([]);
 
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     getAbout();
-  //   }, []);
+  useEffect(() => {
+    getAbout();
+  }, []);
 
-  //   const getAbout = async () => {
-  //     let abtresult = await fetch(config.apiurl + "/aboutus/get_about");
-  //     abtresult = await abtresult.json();
-  //     console.log(abtresult?.data?.results[1]);
-  //     setAbout(abtresult?.data?.results[1]);
-  //   };
+  const getAbout = async () => {
+    let abtresult = await fetch(config.apiurl + "/aboutlist/get_about");
+    abtresult = await abtresult.json();
+    console.log(abtresult?.data?.results[1]);
+    setAbout(abtresult?.data?.results[1]);
+  };
 
   const [title, setTitle] = useState("");
 
   const [foundation, setFoundation] = useState("");
   const [remark, setRemark] = useState("");
-  const [members, setMemebers] = useState("");
+
   const [image, setImage] = useState("");
 
   const [imagepreview, setImagepreview] = useState("");
@@ -39,7 +39,6 @@ const About = () => {
 
   const [updateid, setUpdateid] = useState("");
   const [error, setError] = useState(false);
-  const [mainCategoryParam, setMainCategoryParam] = useState("");
 
   const handlecategory = async (event) => {
     setAbout(event.target.value);
@@ -67,7 +66,7 @@ const About = () => {
   };
 
   const submitProductDetails = async (res) => {
-    const editupdateurl = config.apiurl + "/aboutus/add";
+    const editupdateurl = config.apiurl + "/about/";
     const configdata = {
       headers: {
         "Content-Type": "application/json",
@@ -125,7 +124,7 @@ const About = () => {
                 <div className="card-header pb-3">
                   <div className="row">
                     <div className="col-6 d-flex align-items-center">
-                      <h6 className="mb-0">Add About</h6>
+                      <h6 className="mb-0">Edit About</h6>
                     </div>
                   </div>
                 </div>
@@ -161,37 +160,14 @@ const About = () => {
                           htmlFor="example-text-input"
                           className="form-control-label"
                         >
-                          Foundation
+                          Title
                         </label>
                         <input
                           className="form-control"
-                          type="number"
-                          value={foundation}
+                          type="text"
+                          value={title}
                           onChange={(e) => {
-                            setFoundation(e.target.value);
-                          }}
-                        />
-                        {error && !title && (
-                          <span className="text-danger text-gradient text-xs text-secondary">
-                            Enter the About title
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="col-md-3">
-                      <div className="form-group">
-                        <label
-                          htmlFor="example-text-input"
-                          className="form-control-label"
-                        >
-                          Members
-                        </label>
-                        <input
-                          className="form-control"
-                          type="number"
-                          value={members}
-                          onChange={(e) => {
-                            setMemebers(e.target.value);
+                            setTitle(e.target.value);
                           }}
                         />
                         {error && !title && (
@@ -261,4 +237,4 @@ const About = () => {
     </>
   );
 };
-export default About;
+export default AddAbout;

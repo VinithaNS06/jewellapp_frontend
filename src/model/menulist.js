@@ -100,7 +100,7 @@ const list = [
       {
         name: "Banner",
 
-        subLink: "/bannerlist",
+        subLink: "/banner",
 
         count: 0,
 
